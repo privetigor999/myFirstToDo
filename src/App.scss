@@ -1,0 +1,120 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.todoWrapper {
+  border: 1px solid black;
+  width: 800px;
+  height: 90vh;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  background: #efefef;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 150px;
+  margin: 50px 50px 0;
+  background: #aeaeae;
+  border-radius: 15px;
+  p {
+    padding-top: 10px;
+    font-size: 30px;
+  }
+  .inputButton {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    input {
+      width: 70%;
+      height: 40px;
+      font-size: 25px;
+      padding: 0 20px;
+      border: none;
+      outline: none;
+      border-radius: 10px;
+    }
+    button {
+      height: 40px;
+      width: 80px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      margin-left: 10px;
+      background: #5ae996;
+    }
+    button:hover {
+      box-shadow: 3px 3px 10px rgba($color: #000000, $alpha: 0.3);
+    }
+  }
+}
+.body {
+  display: flex;
+  justify-content: top;
+  align-items: center;
+  flex-direction: column;
+  background: #aeaeae;
+  height: 300px;
+  margin: 30px 50px 0;
+  border-radius: 15px;
+  overflow: scroll;
+
+  .task {
+    background: #fff;
+  }
+  .doneTask {
+    background: rgb(165, 209, 165);
+  }
+
+  .task,
+  .doneTask {
+    margin-top: 10px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    width: 400px;
+    height: 50px;
+    border-radius: 10px;
+    padding: 25px;
+    transition: 0.7s ease-in-out;
+    .done {
+      width: 22px;
+      margin-right: 10px;
+      opacity: 0.3;
+      cursor: pointer;
+    }
+    .done:hover {
+      opacity: 0.7;
+    }
+    .done:active {
+      opacity: 1;
+    }
+
+    p {
+      flex: 1;
+    }
+
+    .remove {
+      width: 22px;
+      opacity: 0.3;
+      cursor: pointer;
+    }
+    .remove:hover {
+      opacity: 0.7;
+    }
+    .remove:active {
+      opacity: 1;
+    }
+  }
+}
