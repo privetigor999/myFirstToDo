@@ -4,9 +4,9 @@ import "./App.scss";
 import uuid from "react-uuid";
 
 const initTasks = [
-  { id: uuid(), text: "Рыбалка", isDone: false },
-  { id: uuid(), text: "Поход", isDone: false },
-  { id: uuid(), text: "Отдых", isDone: false },
+  { id: uuid(), text: "Рыбалка", isDone: false, isEdit: false },
+  { id: uuid(), text: "Поход", isDone: false, isEdit: false },
+  { id: uuid(), text: "Отдых", isDone: false, isEdit: false },
 ];
 
 function App() {
@@ -41,6 +41,28 @@ function App() {
     }
   };
 
+  const isEditText = (id) => {
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === id) {
+          task.isEdit = !task.isEdit;
+        }
+        return task;
+      })
+    );
+  };
+
+  const handleChangeText = (id, field, event) => {
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === id) {
+          task[field] = event.target.value;
+        }
+        return task;
+      })
+    );
+  };
+
   const result = tasks.map((task) => {
     return (
       <Task
@@ -48,8 +70,11 @@ function App() {
         id={task.id}
         text={task.text}
         isDone={task.isDone}
+        isEdit={task.isEdit}
         taskIsDone={taskIsDone}
         removeTask={removeTask}
+        isEditText={isEditText}
+        handleChangeText={handleChangeText}
       />
     );
   });
