@@ -41,7 +41,7 @@ const Task = ({
         <input
           className="inputEdit"
           value={text}
-          onChange={(event) => handleChangeText(id, "text", event)}
+          onChange={(event) => handleChangeText(id, event)}
         />
       ) : (
         <p>{text}</p>

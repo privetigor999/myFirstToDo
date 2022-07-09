@@ -17,7 +17,10 @@ function App() {
     setTasks(
       tasks.map((obj) => {
         if (obj.id === id) {
-          obj.isDone = !obj.isDone;
+          return {
+            ...obj,
+            isDone: !obj.isDone,
+          };
         }
         return obj;
       })
@@ -52,11 +55,14 @@ function App() {
     );
   };
 
-  const handleChangeText = (id, field, event) => {
+  const handleChangeText = (id, event) => {
     setTasks(
       tasks.map((task) => {
         if (task.id === id) {
-          task[field] = event.target.value;
+          return {
+            ...task,
+            text: event.target.value,
+          };
         }
         return task;
       })
@@ -95,7 +101,7 @@ function App() {
           <p>
             Всего задач: <b>{tasks.length}</b>
           </p>
-          {result}
+          <div className="result"> {result}</div>
         </div>
       </div>
     </div>
