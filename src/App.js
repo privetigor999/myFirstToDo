@@ -13,7 +13,7 @@ function App() {
   const [tasks, setTasks] = useState(initTasks);
   const [value, setValue] = useState("");
 
-  const taskIsDone = (id) => {
+  const toggleTaskIsDone = (id) => {
     setTasks(
       tasks.map((obj) => {
         if (obj.id === id) {
@@ -44,29 +44,33 @@ function App() {
     }
   };
 
-  const isEditText = (id) => {
+  const turnOnEditMode = (id) => {
     setTasks(
       tasks.map((task) => {
         if (task.id === id) {
-          task.isEdit = !task.isEdit;
+          return {
+            ...task,
+            isEdit: !task.isEdit,
+          };
         }
         return task;
       })
     );
   };
 
-  const handleChangeText = (id, event) => {
-    setTasks(
-      tasks.map((task) => {
-        if (task.id === id) {
-          return {
-            ...task,
-            text: event.target.value,
-          };
-        }
-        return task;
-      })
-    );
+  const handleSaveChangedTask = (id, value) => {
+    const tasksChanged = tasks.map((task) => {
+      let obj = task;
+      if (task.id === id) {
+        obj = {
+          ...task,
+          text: value,
+          isEdit: !task.isEdit,
+        };
+      }
+      return obj;
+    });
+    setTasks(tasksChanged);
   };
 
   const result = tasks.map((task) => {
@@ -77,10 +81,10 @@ function App() {
         text={task.text}
         isDone={task.isDone}
         isEdit={task.isEdit}
-        taskIsDone={taskIsDone}
+        toggleTaskIsDone={toggleTaskIsDone}
         removeTask={removeTask}
-        isEditText={isEditText}
-        handleChangeText={handleChangeText}
+        turnOnEditMode={turnOnEditMode}
+        onSaveTask={handleSaveChangedTask}
       />
     );
   });

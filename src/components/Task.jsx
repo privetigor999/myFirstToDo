@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import donePng from "./../images/done.png";
 import removePng from "./../images/remove.png";
 import reversePng from "./../images/reverse.png";
@@ -9,12 +9,26 @@ const Task = ({
   id,
   text,
   isDone,
-  taskIsDone,
+  toggleTaskIsDone,
   removeTask,
   isEdit,
-  isEditText,
-  handleChangeText,
+  turnOnEditMode,
+  onSaveTask,
 }) => {
+  const [value, setValue] = useState(text);
+
+  const handleChangeValue = (e) => {
+    setValue(e.target.value);
+  };
+
+  const handleSaveOrEditTask = () => {
+    if (isEdit) {
+      onSaveTask(id, value);
+    }
+  };
+
+  const handleTurnOnEditMode = () => turnOnEditMode(id);
+
   return (
     <div className={isDone ? "doneTask" : "task"} key={id} id={id}>
       {!isEdit && (
@@ -22,7 +36,7 @@ const Task = ({
           className="done"
           src={isDone ? reversePng : donePng}
           alt="done"
-          onClick={() => taskIsDone(id)}
+          onClick={() => toggleTaskIsDone(id)}
         />
       )}
 
@@ -31,17 +45,15 @@ const Task = ({
           className={isEdit ? "saveButton" : "editButton"}
           src={isEdit ? editPng2 : editPng1}
           alt="edit"
-          onClick={() => {
-            isEditText(id);
-          }}
+          onClick={isEdit ? handleSaveOrEditTask : handleTurnOnEditMode}
         />
       )}
 
       {isEdit ? (
         <input
           className="inputEdit"
-          value={text}
-          onChange={(event) => handleChangeText(id, event)}
+          value={value}
+          onChange={handleChangeValue}
         />
       ) : (
         <p>{text}</p>
