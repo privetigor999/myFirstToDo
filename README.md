@@ -1,5 +1,9 @@
 # ToDo list
 
+## GitPage:
+
+https://privetigor999.github.io/myToDo/
+
 ## v1.1
 
 Добавлена кнопка редактирования текста, изменены кнопки
